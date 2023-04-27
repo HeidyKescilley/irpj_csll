@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cálculo de IRPJ/CSLL</title>
+    <link rel="stylesheet" href="style.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -18,75 +19,50 @@
     <h4>Faturamento</h4>
     <table class="table">
       <thead>
-        <th></th>
         <th>1º Mês</th>
         <th>2º Mês</th>
         <th>3º Mês</th>
       </thead>
       <tbody>
         <tr>
-          <td style="text-align: left">Normal (32%)</td>
           <td>
-            <input type="number" id="normal1" placeholder="Faturamento em $" />
+            <input type="number" id="fatu1" placeholder="Faturamento em $" />
           </td>
           <td>
-            <input type="number" id="normal2" placeholder="Faturamento em $" />
+            <input type="number" id="fatu2" placeholder="Faturamento em $" />
           </td>
           <td>
-            <input type="number" id="normal3" placeholder="Faturamento em $" />
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Vendas/Clinicas (8%/12%)</td>
-          <td>
-            <input type="number" id="venda1" placeholder="Faturamento em $" />
-          </td>
-          <td>
-            <input type="number" id="venda2" placeholder="Faturamento em $" />
-          </td>
-          <td>
-            <input type="number" id="venda3" placeholder="Faturamento em $" />
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Transporte (16%)</td>
-          <td>
-            <input type="number" id="transp1" placeholder="Faturamento em $" />
-          </td>
-          <td>
-            <input type="number" id="transp2" placeholder="Faturamento em $" />
-          </td>
-          <td>
-            <input type="number" id="transp3" placeholder="Faturamento em $" />
+            <input type="number" id="fatu3" placeholder="Faturamento em $" />
           </td>
         </tr>
       </tbody>
     </table>
+    <br />
+    <form>
+      <h3>Presunção de IRPJ e CSLL</h3>
+      <input class="radio" type="radio" id="32" name="opção" value="32" />
+      <label for="">32% / 32%</label><br />
+      <input class="radio" type="radio" id="8" name="opção" value="8" />
+      <label for="">8% / 12%</label><br />
+      <input class="radio" type="radio" id="16" name="opção" value="16" />
+      <label for="">16% / 12%</label>
+    </form>
+    <br /><br />
     <button onclick="calcular()">Calcular</button>
 
     <br />
     <h4>Soma</h4>
     <table class="table">
       <thead>
-        <th></th>
         <th>Soma Total</th>
-        <th>Presunção</th>
+        <th>Presunção IRPJ</th>
+        <th>Presunção CSLL</th>
       </thead>
       <tbody>
         <tr>
-          <td style="text-align: left">Normal (32%)</td>
-          <td><p id="tNormal"></p></td>
-          <td><p id="pNormal"></p></td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Vendas/Clinicas (8%/12%)</td>
-          <td><p id="tVenda"></p></td>
-          <td><p id="pVenda"></p></td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Transporte (16%)</td>
-          <td><p id="tTransp"></p></td>
-          <td><p id="pTransp"></p></td>
+          <td><p id="soma"></p></td>
+          <td><p id="presunçãoIr"></p></td>
+          <td><p id="presunçãoCsll"></p></td>
         </tr>
       </tbody>
     </table>
@@ -94,29 +70,21 @@
     <h4>Cálculo</h4>
     <table class="table">
       <thead>
-        <th></th>
-        <th>Normal (32%)</th>
-        <th>Vendas/Clinicas (8%/12%)</th>
-        <th>Transporte (16%)</th>
+        <th>#</th>
+        <th>Valor do imposto</th>
       </thead>
-      <tbody>
+      <tbody class="table-group-divider">
         <tr>
-          <td style="text-align: left">IRPJ Normal</td>
-          <td><p id="irNormal"></p></td>
-          <td><p id="irVenda"></p></td>
-          <td><p id="irTransp"></p></td>
+          <td>IRPJ Normal</td>
+          <td><p id="ir"></p></td>
         </tr>
         <tr>
-          <td style="text-align: left">IRPJ Adicional (10%)</td>
-          <td><p id="irNormalAd"></p></td>
-          <td><p id="irVendaAd"></p></td>
-          <td><p id="irTranspAd"></p></td>
+          <td>IRPJ Adicional (10%)</td>
+          <td><p id="irAd"></p></td>
         </tr>
         <tr>
-          <td style="text-align: left">CSLL</td>
-          <td><p id="csllNormal"></p></td>
-          <td><p id="csllVenda"></p></td>
-          <td><p id="csllTransp"></p></td>
+          <td>CSLL</td>
+          <td><p id="csll"></p></td>
         </tr>
       </tbody>
     </table>

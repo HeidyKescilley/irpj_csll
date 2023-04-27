@@ -1,0 +1,24 @@
+* {
+  text-align: center;
+}
+
+table {
+  text-align: center;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid black;
+}
+
+input {
+  border: transparent;
+  text-decoration: none;
+}
+
+button {
+  text-align: center;
+  width: 150px;
+  height: 30px;
+}

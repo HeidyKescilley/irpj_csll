@@ -1,95 +1,106 @@
-let normal1 = 0;
-let normal2 = 0;
-let normal3 = 0;
-let venda1 = 0;
-let venda2 = 0;
-let venda3 = 0;
-let transp1 = 0;
-let transp2 = 0;
-let transp3 = 0;
-let tNormal = 0;
-let tTransp = 0;
-let tVenda = 0;
-let pNormal = 0;
-let pVenda = 0;
-let pTransp = 0;
-let irNormal = 0;
-let irVenda = 0;
-let irTransp = 0;
-let irNormalAd = 0;
-let irVendaAd = 0;
-let irTranspAd = 0;
-let csllNormal = 0;
-let csllVenda = 0;
-let csllTransp = 0;
+let fatu1 = "";
+let fatu2 = "";
+let fatu3 = "";
+let opção = "";
+let soma = 0;
+let presunçãoIr = 0;
+let presunçãoCsll = 0;
+let ir = 0;
+let irAd = 0;
+let csll = 0;
 let irPagar = 0;
 let csllPagar = 0;
 
 function calcular() {
-  normal1 = document.getElementById("normal1").value;
-  normal2 = document.getElementById("normal2").value;
-  normal3 = document.getElementById("normal3").value;
-  venda1 = document.getElementById("venda1").value;
-  venda2 = document.getElementById("venda2").value;
-  venda3 = document.getElementById("venda3").value;
-  transp1 = document.getElementById("transp1").value;
-  transp2 = document.getElementById("transp2").value;
-  transp3 = document.getElementById("transp3").value;
+  fatu1 = document.getElementById("fatu1").value;
+  fatu2 = document.getElementById("fatu2").value;
+  fatu3 = document.getElementById("fatu3").value;
 
-  tNormal = parseFloat(normal1) + parseFloat(normal2) + parseFloat(normal3);
-  tVenda = parseFloat(venda1) + parseFloat(venda2) + parseFloat(venda3);
-  tTransp = parseFloat(transp1) + parseFloat(transp2) + parseFloat(transp3);
+  soma = parseFloat(fatu1) + parseFloat(fatu2) + parseFloat(fatu3);
 
-  document.getElementById("tNormal").innerHTML = tNormal;
-  document.getElementById("tVenda").innerHTML = tVenda;
-  document.getElementById("tTransp").innerHTML = tTransp;
+  document.getElementById("fatu1").innerHTML = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(fatu1);
+  document.getElementById("fatu2").innerHTML = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(fatu2);
+  document.getElementById("fatu3").innerHTML = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(fatu3);
 
-  pNormal = tNormal * 0.32;
-  pVenda = tVenda * 0.08;
-  pTransp = tTransp * 0.16;
+  document.getElementById("soma").innerHTML = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(soma);
 
-  document.getElementById("pNormal").innerHTML = pNormal;
-  document.getElementById("pVenda").innerHTML = pVenda;
-  document.getElementById("pTransp").innerHTML = pTransp;
+  opção = document.getElementsByName("opção");
 
-  irNormal = pNormal * 0.15;
-  irVenda = pVenda * 0.15;
-  irTransp = pTransp * 0.15;
-  csllNormal = pNormal * 0.15;
-  csllVenda = pVenda * 0.15;
-  csllTransp = pTransp * 0.15;
-
-  if (pNormal >= 60000) {
-    irNormalAd = (pNormal - 60000) * 0.1;
-  } else {
-    irNormalAd = 0;
-  }
-  if (pVenda >= 60000) {
-    irVendaAd = (pVenda - 60000) * 0.1;
-  } else {
-    irVendaAd = 0;
-  }
-  if (pTransp >= 60000) {
-    irTranspAd = (irTransp - 60000) * 0.1;
-  } else {
-    irTranspAd = 0;
+  if (opção[0].checked) {
+    opção = "32";
+  } else if (opção[1].checked) {
+    opção = "8";
+  } else if (opção[2].checked) {
+    opção = "16";
   }
 
-  document.getElementById("irNormal").innerHTML = irNormal;
-  document.getElementById("irVenda").innerHTML = irVenda;
-  document.getElementById("irTransp").innerHTML = irTransp;
+  switch (opção) {
+    case "32":
+      presunçãoIr = soma * 0.32;
+      presunçãoCsll = soma * 0.32;
+      break;
+    case "8":
+      presunçãoIr = soma * 0.08;
+      presunçãoCsll = soma * 0.12;
+      break;
+    case "16":
+      presunçãoIr = soma * 0.16;
+      presunçãoCsll = soma * 0.12;
+      break;
+  }
 
-  document.getElementById("irNormalAd").innerHTML = irNormalAd;
-  document.getElementById("irVendaAd").innerHTML = irVendaAd;
-  document.getElementById("irTranspAd").innerHTML = irTranspAd;
+  document.getElementById("presunçãoIr").innerHTML = new Intl.NumberFormat(
+    "pt-BR",
+    { style: "currency", currency: "BRL" }
+  ).format(presunçãoIr);
+  document.getElementById("presunçãoCsll").innerHTML = new Intl.NumberFormat(
+    "pt-BR",
+    { style: "currency", currency: "BRL" }
+  ).format(presunçãoCsll);
 
-  document.getElementById("csllNormal").innerHTML = csllNormal;
-  document.getElementById("csllVenda").innerHTML = csllVenda;
-  document.getElementById("csllTransp").innerHTML = csllTransp;
+  ir = presunçãoIr * 0.15;
+  csll = presunçãoCsll * 0.09;
 
-  irPagar = irNormal + irNormalAd + irVenda + irVendaAd + irTransp + irTranspAd;
-  csllPagar = csllNormal + csllVenda + csllTransp;
+  if (presunçãoIr >= 60000) {
+    irAd = (presunçãoIr - 60000) * 0.1;
+  } else {
+    irAd = 0;
+  }
 
-  document.getElementById("irPagar").innerHTML = irPagar;
-  document.getElementById("csllPagar").innerHTML = csllPagar;
+  document.getElementById("ir").innerHTML = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(ir);
+  document.getElementById("irAd").innerHTML = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(irAd);
+  document.getElementById("csll").innerHTML = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(csll);
+
+  irPagar = ir + irAd;
+  csllPagar = csll;
+
+  document.getElementById("irPagar").innerHTML = new Intl.NumberFormat(
+    "pt-BR",
+    { style: "currency", currency: "BRL" }
+  ).format(irPagar);
+  document.getElementById("csllPagar").innerHTML = new Intl.NumberFormat(
+    "pt-BR",
+    { style: "currency", currency: "BRL" }
+  ).format(csllPagar);
 }
